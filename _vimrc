@@ -416,3 +416,14 @@ if has("persistent_undo")
   set undofile
 endif
 colorscheme monokai
+" Open and close all the three plugins on the same time 
+nmap <F8>  :TrinityToggleAll<CR>
+
+" Open and close the Source Explorer separately 
+nmap <UP>  :TrinityToggleSourceExplorer<CR>
+
+" Open and close the Taglist separately 
+nmap <LEFT> :TrinityToggleTagList<CR>
+
+" Open and close the NERD Tree separately 
+nmap <RIGHT> :TrinityToggleNERDTree<CR>
