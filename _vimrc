@@ -79,7 +79,8 @@ set tm=500
 syntax enable
 syntax on
 
-colorscheme jellybeans
+colorscheme monokai
+" colorscheme jellybeans
 " colorscheme github
 set background=dark
 
@@ -414,3 +415,4 @@ if has("persistent_undo")
   set undodir='~/.undodir/'
   set undofile
 endif
+colorscheme monokai
