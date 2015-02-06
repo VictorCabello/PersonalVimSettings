@@ -37,3 +37,6 @@
 [submodule "bundle/erics_vim_syntax_and_color_highlighting"]
 	path = bundle/erics_vim_syntax_and_color_highlighting
 	url = https://github.com/sentientmachine/erics_vim_syntax_and_color_highlighting.git
+[submodule "bundle/vim-fugitive"]
+	path = bundle/vim-fugitive
+	url = https://github.com/tpope/vim-fugitive.git
