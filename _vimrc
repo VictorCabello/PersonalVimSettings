@@ -79,8 +79,8 @@ set tm=500
 syntax enable
 syntax on
 
-colorscheme monokai
-" colorscheme jellybeans
+" colorscheme monokai
+colorscheme jellybeans
 " colorscheme github
 set background=dark
 
@@ -415,15 +415,5 @@ if has("persistent_undo")
   set undodir='~/.undodir/'
   set undofile
 endif
-colorscheme monokai
+" colorscheme monokai
 " Open and close all the three plugins on the same time 
-nmap <F8>  :TrinityToggleAll<CR>
-
-" Open and close the Source Explorer separately 
-nmap <UP>  :TrinityToggleSourceExplorer<CR>
-
-" Open and close the Taglist separately 
-nmap <LEFT> :TrinityToggleTagList<CR>
-
-" Open and close the NERD Tree separately 
-nmap <RIGHT> :TrinityToggleNERDTree<CR>

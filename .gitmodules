@@ -31,9 +31,6 @@
 [submodule "bundle/emmet-vim"]
 	path = bundle/emmet-vim
 	url = https://github.com/mattn/emmet-vim.git
-[submodule "bundle/Trinity"]
-	path = bundle/Trinity
-	url = https://github.com/wesleyche/Trinity.git
 [submodule "bundle/SrcExpl"]
 	path = bundle/SrcExpl
 	url = https://github.com/wesleyche/SrcExpl.git
