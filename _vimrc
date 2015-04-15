@@ -417,3 +417,5 @@ if has("persistent_undo")
 endif
 " colorscheme monokai
 " Open and close all the three plugins on the same time 
+
+map <F9> :NERDTreeToggle<CR>
