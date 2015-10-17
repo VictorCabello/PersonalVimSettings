@@ -79,7 +79,7 @@ set tm=500
 syntax enable
 syntax on
 
-colorscheme molokai
+colorscheme monokai
 " colorscheme jellybeans
 set background=dark
 
