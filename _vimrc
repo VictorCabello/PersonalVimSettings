@@ -79,7 +79,6 @@ set tm=500
 syntax enable
 syntax on
 
-colorscheme monokai
 " colorscheme jellybeans
 set background=dark
 
@@ -452,3 +451,4 @@ let g:ctrlp_open_new_file = 'r'
 let g:session_autosave = 'no' 
 let g:session_autoload = 'no'     
 autocmd BufRead,BufNewFile *.log set syntax=log4j
+colorscheme monokai
