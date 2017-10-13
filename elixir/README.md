@@ -2,10 +2,10 @@
 
 For this use the follwoing rules:
 
-* **:Gstatus** is your friend.
-..* Alwyas use **ctrp**, **-**, **C**.
-..* Check the fugitive doc for that.
-* Enjoy f12
-* contrl p  will let you know find files
-* contrl space will let you move between buffers
-* Check the doc for each plugin
+1. **:Gstatus** is your friend.
+	* Alwyas use **ctrp**, **-**, **C**.
+	* Check the fugitive doc for that.
+2. Enjoy f12
+3. contrl p  will let you know find files
+4. contrl space will let you move between buffers
+5. Check the doc for each plugin
