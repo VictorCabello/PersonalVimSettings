@@ -59,3 +59,5 @@ call g:quickmenu#append('# Develop', '')
 call g:quickmenu#append('test', '!mix test', 'Run all the tests')
 call g:quickmenu#append('build', '!mix compile', 'Build the code')
 
+
+set nobackup
