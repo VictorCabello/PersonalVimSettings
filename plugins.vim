@@ -7,7 +7,7 @@ Plug 'scrooloose/nerdtree'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 "=> Interface
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
-Plug 'tomasr/molokai'
+Plug 'sonph/onehalf', { 'rtp': 'vim' }
 Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'nathanaelkane/vim-indent-guides'

@@ -23,6 +23,9 @@ set guioptions-=m
 
 " Colorscheme
 set background=dark
-color molokai
+color onehalfdark
+let g:airline_theme='onehalfdark'
 
+set cursorline
+set cursorcolumn
 set nu
