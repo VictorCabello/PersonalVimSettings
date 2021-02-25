@@ -12,6 +12,9 @@ I have this bad luck that because my work I always end working on windows enviro
 
 	git clone --depth=1 https://github.com/VictorCabello/PersonalVimSettings.git ~/vimfiles
     
+
+After clone the repo you need to open your vim editor and execute the command **:PlugInstall** to install all the plugins. The first time that you open vim it would fail because some configurations depends of the plugins.   
+    
 I didn't test it in a linux environment jet but I am sure that the only change after run that command could be just add the following to your **~/.vimrc**.
 
     source ~/vimfiles/vimrc
