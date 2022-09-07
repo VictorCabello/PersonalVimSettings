@@ -6,18 +6,18 @@ The only challenge with this great tool is to try to migrate my settings from on
 
 Given that inconvenient I create this repo to keep my configurations up and running and ready to be copied for me to an other machine. At the same time I hope that my configuration could help to some one else.
 
+# Dependencies
+
+First we need to instal [vim-plug](https://github.com/junegunn/vim-plug)
+
 # How to install
 
-I have this bad luck that because my work I always end working on windows environment so I need to use my favorite text editor in that environment so for me the installation process is simple like to run the following command:
+## Windows (PowerShell)
 
-	git clone --depth=1 https://github.com/VictorCabello/PersonalVimSettings.git ~/vimfiles
-    
-
-After clone the repo you need to open your vim editor and execute the command **:PlugInstall** to install all the plugins. The first time that you open vim it would fail because some configurations depends of the plugins.   
-    
-I didn't test it in a linux environment jet but I am sure that the only change after run that command could be just add the following to your **~/.vimrc**.
-
-    source ~/vimfiles/vimrc
+```powershell
+iwr -useb https://raw.githubusercontent.com/VictorCabello/PersonalVimSettings/master/vimrc |`
+    ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim/init.vim" -Force
+```
 
 # Maps Cheat Sheet
 
@@ -29,6 +29,10 @@ In this section I would like to document the different maps that are already imp
     <space>           Find until the end of the document           
     Crl-<space>       Find until the begining of the document           
     <leader><cr>      Clear search findings
+    <C-j>             Move between windows down
+    <C-k>             Move between windows up
+    <C-h>             Move between windows rigth
+    <C-l>             Move between windows left
     <leader>bd        Close the current buffer
     <leader>ba        Close all the buffers
     <leader>l         Next buffer
@@ -38,6 +42,7 @@ In this section I would like to document the different maps that are already imp
     <leader>tc        Close current tab
     <leader>tm        Move Tab
     <leader>t<leader> Next Tab
+    <leader>tl        move to last tab
     <leader>te        Opens a new tab with the current buffer's path
     <leader>cd        Switch CWD to the directory of the open buffer
     <leader>ss        Pressing ,ss will toggle and untoggle spell checking
@@ -49,21 +54,25 @@ In this section I would like to document the different maps that are already imp
     <M-k>             Move a line of text using ALT+[jk] or Command+[jk] on mac
     <M-j>             Move a line of text using ALT+[jk] or Command+[jk] on mac
     <M-k>             Move a line of text using ALT+[jk] or Command+[jk] on mac
-    <F12>             Open quick menu (TODO I didn't configure what I want to execute with it)
     <leader>nn        Open file tree on the current path
     <leader>nb        Open file tree on the bookmarks
     <leader>nf        Open file tree on the path of the active file
     <leader>z         Write without distractions or comeback to normality
     <leader>zl        More focus
     <leader>a         Enable/disable the linter
+    <Leader>m         Remove Window ^M
+    <leader>q         Open buffer for scribble
+    <leader>x         Open markdown buffer for scribble
+    <leader>pp        Toggle paste mode on and off
+    <leader>e         Quick edit vim configs
+    <leader>o         Show open buffers
+    <leader>f         Show resent files
+    <C-p> or <C-n>    Sustitue paste for older o newer
+    <leader>nn        Open/close File Browser
+    <leader>nb        Open/close bookmarks
+    <leader>nf        Open/close File Browser with current file
 
-# Note regarding fonts    
 
-Maybe this section is not very important because it is mainly regarding to eye candy but I enjoy those little details that improve my interface meanwhile I am coding.
-
-Some of the plugins that I use like [NerdTree](https://github.com/preservim/nerdtree) or [airline](https://github.com/vim-airline/vim-airline) looks better when you set correctly a powerline font.
-
-In my case I prefer to use [NERD Fonts](https://www.nerdfonts.com/) because that project it is a little more updated. It was easy as go to the download part of the page and choose the font that I like.
 
 
 
