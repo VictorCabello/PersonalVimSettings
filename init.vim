@@ -529,122 +529,6 @@ func! CurrentFileDir(cmd)
     return a:cmd . " " . expand("%:p:h") . "/"
 endfunc
 
-
-"=================================================================================
-"
-"   Following file contains the commands on how to run the currently open code.
-"   The default mapping is set to F5 like most code editors.
-"   Change it as you feel comfortable with, keeping in mind that it does not
-"   clash with any other keymapping.
-"
-"   NOTE: Compilers for different systems may differ. For example, in the case
-"   of C and C++, we have assumed it to be gcc and g++ respectively, but it may
-"   not be the same. It is suggested to check first if the compilers are installed
-"   before running the code, or maybe even switch to a different compiler.
-"
-"   NOTE: Adding support for more programming languages
-"
-"   Just add another elseif block before the 'endif' statement in the same
-"   way it is done in each case. Take care to add tabbed spaces after each
-"   elseif block (similar to python). For example:
-"
-"   elseif &filetype == '<your_file_extension>'
-"       exec '!<your_compiler> %'
-"
-"   NOTE: The '%' sign indicates the name of the currently open file with extension.
-"         The time command displays the time taken for execution. Remove the
-"         time command if you dont want the system to display the time
-"
-"=================================================================================
-
-map <F5> :call CompileRun()<CR>
-imap <F5> <Esc>:call CompileRun()<CR>
-vmap <F5> <Esc>:call CompileRun()<CR>
-
-func! CompileRun()
-exec "w"
-if &filetype == 'c'
-    exec "!gcc % -o %<"
-    exec "!time ./%<"
-elseif &filetype == 'cpp'
-    exec "!g++ % -o %<"
-    exec "!time ./%<"
-elseif &filetype == 'java'
-    exec "!javac %"
-    exec "!time java %"
-elseif &filetype == 'sh'
-    exec "!time bash %"
-elseif &filetype == 'python'
-    exec "!time python3 %"
-elseif &filetype == 'html'
-    exec "!google-chrome % &"
-elseif &filetype == 'go'
-    exec "!go build %<"
-    exec "!time go run %"
-elseif &filetype == 'matlab'
-    exec "!time octave %"
-endif
-endfunc
-
-
-""""""""""""""""""""""""""""""
-" => Python section
-""""""""""""""""""""""""""""""
-let python_highlight_all = 1
-au FileType python syn keyword pythonDecorator True None False self
-
-au BufNewFile,BufRead *.jinja set syntax=htmljinja
-au BufNewFile,BufRead *.mako set ft=mako
-
-au FileType python map <buffer> F :set foldmethod=indent<cr>
-
-au FileType python inoremap <buffer> $r return 
-au FileType python inoremap <buffer> $i import 
-au FileType python inoremap <buffer> $p print 
-au FileType python inoremap <buffer> $f # --- <esc>a
-au FileType python map <buffer> <leader>1 /class 
-au FileType python map <buffer> <leader>2 /def 
-au FileType python map <buffer> <leader>C ?class 
-au FileType python map <buffer> <leader>D ?def 
-
-
-""""""""""""""""""""""""""""""
-" => JavaScript section
-"""""""""""""""""""""""""""""""
-au FileType javascript call JavaScriptFold()
-au FileType javascript setl fen
-au FileType javascript setl nocindent
-
-au FileType javascript,typescript imap <C-t> console.log();<esc>hi
-au FileType javascript,typescript imap <C-a> alert();<esc>hi
-
-au FileType javascript,typescript inoremap <buffer> $r return 
-au FileType javascript,typescript inoremap <buffer> $f // --- PH<esc>FP2xi
-
-function! JavaScriptFold() 
-    setl foldmethod=syntax
-    setl foldlevelstart=1
-    syn region foldBraces start=/{/ end=/}/ transparent fold keepend extend
-
-    function! FoldText()
-        return substitute(getline(v:foldstart), '{.*', '{...}', '')
-    endfunction
-    setl foldtext=FoldText()
-endfunction
-
-
-""""""""""""""""""""""""""""""
-" => CoffeeScript section
-"""""""""""""""""""""""""""""""
-function! CoffeeScriptFold()
-    setl foldmethod=indent
-    setl foldlevelstart=1
-endfunction
-au FileType coffee call CoffeeScriptFold()
-
-au FileType gitcommit call setpos('.', [0, 1, 1, 0])
-
-
 """"""""""""""""""""""""""""""
 " => Shell section
 """"""""""""""""""""""""""""""
@@ -656,18 +540,10 @@ if exists('$TMUX')
     endif
 endif
 
-
-""""""""""""""""""""""""""""""
-" => Twig section
-""""""""""""""""""""""""""""""
-autocmd BufRead *.twig set syntax=html filetype=html
-
-
 """"""""""""""""""""""""""""""
 " => Markdown
 """"""""""""""""""""""""""""""
 let vim_markdown_folding_disabled = 1
-
 
 call plug#begin(expand('~/.config/nvim/plugged'))
 """"""""""""""""""""""""""""""
@@ -689,7 +565,8 @@ Plug 'neovim/nvim-lspconfig'            " find reference completion rename forma
 " => File browsers
 """"""""""""""""""""""""""""""
 Plug 'yegappan/mru'                     " Most resent files
-Plug 'preservim/nerdtree'               " File tree
+Plug 'kyazdani42/nvim-web-devicons' " optional, for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 Plug 'jlanzarotta/bufexplorer'          " Explorar buffer
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' } " Fuzzi search
 
@@ -740,13 +617,13 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Nerd Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:NERDTreeWinPos = "right"
-let NERDTreeShowHidden=0
-let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-let g:NERDTreeWinSize=35
-map <leader>nn :NERDTreeToggle<cr>
-map <leader>nb :NERDTreeFromBookmark<Space>
-map <leader>nf :NERDTreeFind<cr>
+" let g:NERDTreeWinPos = "right"
+" let NERDTreeShowHidden=0
+" let NERDTreeIgnore = ['\.pyc$', '__pycache__']
+" let g:NERDTreeWinSize=35
+" map <leader>nn :NERDTreeToggle<cr>
+" map <leader>nb :NERDTreeFromBookmark<Space>
+" map <leader>nf :NERDTreeFind<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => surround.vim config
