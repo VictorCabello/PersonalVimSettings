@@ -1,4 +1,27 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vim-Plug core
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
+if has('win32')&&!has('win64')
+  let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
+else
+  let curl_exists=expand('curl')
+endif
+
+if !filereadable(vimplug_exists)
+  if !executable(curl_exists)
+    echoerr "You have to install curl or first install vim-plug yourself!"
+    execute "q!"
+  endif
+  echo "Installing Vim-Plug..."
+  echo ""
+  silent exec "!"curl_exists" -fLo " . shellescape(vimplug_exists) . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+  let g:not_finish_vimplug = "yes"
+
+  autocmd VimEnter * PlugInstall
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Sets how many lines of history VIM has to remember
@@ -27,7 +50,19 @@ command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => VIM user interface
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Display line number
 set nu
+
+" Display relative number
+set rnu
+
+" Highlight the current line
+set cursorline
+
+" Highlight the current column
+set cursorcolumn
+
 " Set 7 lines to the cursor - when moving vertically using j/k
 set so=7
 
@@ -228,8 +263,6 @@ endtry
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Editing mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -299,9 +332,9 @@ if has("mac") || has("macunix")
 elseif has("win16") || has("win32")
     " set gfn=Consolas:11
 elseif has("gui_gtk2")
-    set gfn=IBM\ Plex\ Mono\ 14,:Hack\ 14,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+    " set gfn=Nato\ Sans\ Display\ Regular\ 14
 elseif has("linux")
-    set gfn=IBM\ Plex\ Mono\ 14,:Hack\ 14,Source\ Code\ Pro\ 12,Bitstream\ Vera\ Sans\ Mono\ 11
+    " set gfn=Nato\ Sans\ Display\ Regular\ 14
 elseif has("unix")
     set gfn=Monospace\ 11
 endif
@@ -319,8 +352,8 @@ colorscheme desert
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Fast editing and reloading of vimrc configs
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>e :e! ~/AppData/Local/nvim/init.vim<cr>
-autocmd! bufwritepost ~/AppData/Local/nvim/init.vim source ~/AppData/Local/nvim/init.vim
+map <leader>e :e! ~/.config/nvim/init.vim<cr>
+autocmd! bufwritepost ~/.config/nvim/init.vim source ~/.config/nvim/init.vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -328,11 +361,10 @@ autocmd! bufwritepost ~/AppData/Local/nvim/init.vim source ~/AppData/Local/nvim/
 "    means that you can undo even when you close a buffer/VIM
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 try
-    set undodir=~/AppData/Local/nvim/undodir
+    set undodir=~/.config/nvim/undodir
     set undofile
 catch
 endtry
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Command mode related
@@ -360,7 +392,6 @@ map ½ $
 cmap ½ $
 imap ½ $
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Parenthesis/bracket
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -379,17 +410,10 @@ inoremap $4 {<esc>o}<esc>O
 inoremap $q ''<esc>i
 inoremap $e ""<esc>i
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General abbreviations
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 iab xdate <C-r>=strftime("%d/%m/%y %H:%M:%S")<cr>
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Omni complete functions
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ack searching and cope displaying
@@ -645,34 +669,52 @@ autocmd BufRead *.twig set syntax=html filetype=html
 let vim_markdown_folding_disabled = 1
 
 
-call plug#begin()
-Plug 'jlanzarotta/bufexplorer'
-Plug 'yegappan/mru'
-Plug 'maxbrunsfeld/vim-yankstack'
-Plug 'preservim/nerdtree'
-Plug 'mg979/vim-visual-multi'
-Plug 'tpope/vim-surround'
-Plug 'dense-analysis/ale'
-Plug 'airblade/vim-gitgutter'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'tpope/vim-fugitive'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
-Plug 'folke/twilight.nvim'
-Plug 'beauwilliams/statusline.lua'
-Plug 'NLKNguyen/papercolor-theme'
+call plug#begin(expand('~/.config/nvim/plugged'))
+""""""""""""""""""""""""""""""
+" => Change default behavior
+""""""""""""""""""""""""""""""
+Plug 'tpope/vim-surround'               " Add text object for surrender
+Plug 'editorconfig/editorconfig-vim'    " Estandard configuration base on .config file
+Plug 'nvim-lua/plenary.nvim'            " Lua libraries, base for other plugins
+Plug 'maxbrunsfeld/vim-yankstack'       " Improve yank
+
+""""""""""""""""""""""""""""""
+" => Support for programers
+""""""""""""""""""""""""""""""
+Plug 'dense-analysis/ale'               " Check lint
+Plug 'nvim-treesitter/nvim-treesitter'  " Sintax
+Plug 'neovim/nvim-lspconfig'            " find reference completion rename format
+
+""""""""""""""""""""""""""""""
+" => File browsers
+""""""""""""""""""""""""""""""
+Plug 'yegappan/mru'                     " Most resent files
+Plug 'preservim/nerdtree'               " File tree
+Plug 'jlanzarotta/bufexplorer'          " Explorar buffer
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' } " Fuzzi search
+
+""""""""""""""""""""""""""""""
+" => File browsers
+""""""""""""""""""""""""""""""
+Plug 'airblade/vim-gitgutter'           " Visual status of the file related git
+Plug 'tpope/vim-fugitive'               " Git layer for vim
+
+""""""""""""""""""""""""""""""
+" => File browsers
+""""""""""""""""""""""""""""""
+Plug 'folke/twilight.nvim'              " Highlight current segment of file
+Plug 'beauwilliams/statusline.lua'      " Status line
+Plug 'NLKNguyen/papercolor-theme'       " Colorscheme
 call plug#end()
 
 """"""""""""""""""""""""""""""
 " =>  BufferExplorer
 """"""""""""""""""""""""""""""
-
 let g:bufExplorerDefaultHelp=0
 let g:bufExplorerShowRelativePath=1
 let g:bufExplorerFindActive=1
 let g:bufExplorerSortBy='name'
 map <leader>o :BufExplorer<cr>
-
 
 """"""""""""""""""""""""""""""
 " => MRU plugin
@@ -680,15 +722,12 @@ map <leader>o :BufExplorer<cr>
 let MRU_Max_Entries = 400
 map <leader>f :MRU<CR>
 
-
 """"""""""""""""""""""""""""""
 " => YankStack
 """"""""""""""""""""""""""""""
 let g:yankstack_yank_keys = ['y', 'd']
-
 nmap <C-p> <Plug>yankstack_substitute_older_paste
 nmap <C-n> <Plug>yankstack_substitute_newer_paste
-
 
 """"""""""""""""""""""""""""""
 " => telescope
@@ -709,31 +748,12 @@ map <leader>nn :NERDTreeToggle<cr>
 map <leader>nb :NERDTreeFromBookmark<Space>
 map <leader>nf :NERDTreeFind<cr>
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => vim-multiple-cursors
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:multi_cursor_use_default_mapping=0
-
-" Default mapping
-let g:multi_cursor_start_word_key      = '<C-s>'
-let g:multi_cursor_select_all_word_key = '<A-s>'
-let g:multi_cursor_start_key           = 'g<C-s>'
-let g:multi_cursor_select_all_key      = 'g<A-s>'
-let g:multi_cursor_next_key            = '<C-s>'
-let g:multi_cursor_prev_key            = '<C-p>'
-let g:multi_cursor_skip_key            = '<C-x>'
-let g:multi_cursor_quit_key            = '<Esc>'
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => surround.vim config
 " Annotate strings with gettext 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Ale (syntax checker and linter)
@@ -753,15 +773,11 @@ let g:ale_set_highlights = 0
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_enter = 0
 
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Git gutter (Git diff)
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:gitgutter_enabled=0
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
-
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => EditorConfig (project-specific EditorConfig rule)
