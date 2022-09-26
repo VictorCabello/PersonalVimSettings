@@ -615,15 +615,23 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Nerd Tree
+" => Nvim Tree
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:NERDTreeWinPos = "right"
-" let NERDTreeShowHidden=0
-" let NERDTreeIgnore = ['\.pyc$', '__pycache__']
-" let g:NERDTreeWinSize=35
-" map <leader>nn :NERDTreeToggle<cr>
+map <leader>nn :NvimTreeFocus<cr>
+map <leader>nf :NvimTreeFindFile<cr>
 " map <leader>nb :NERDTreeFromBookmark<Space>
-" map <leader>nf :NERDTreeFind<cr>
+
+lua << EOF
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+-- empty setup using defaults
+require("nvim-tree").setup({
+    view = {
+        side = "right"
+    },
+    filters = { custom = { ".git$", "pyc$", "__pycache__" }}
+})
+EOF
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => surround.vim config
