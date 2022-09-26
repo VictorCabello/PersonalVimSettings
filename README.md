@@ -12,11 +12,16 @@ First we need to instal [vim-plug](https://github.com/junegunn/vim-plug)
 
 # How to install
 
-## Windows (PowerShell)
+## General dependencies
 
-```powershell
-iwr -useb https://raw.githubusercontent.com/VictorCabello/PersonalVimSettings/master/vimrc |`
-    ni "$(@($env:XDG_DATA_HOME, $env:LOCALAPPDATA)[$null -eq $env:XDG_DATA_HOME])/nvim/init.vim" -Force
+Some server are required due the LSP configuration. Please install the following server:
+
+- [Python](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright)
+
+## Linux
+
+```bash
+$ git clone git@github.com:VictorCabello/PersonalVimSettings.git ~/.config/nvim
 ```
 
 # Maps Cheat Sheet
