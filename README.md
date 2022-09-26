@@ -17,6 +17,7 @@ First we need to instal [vim-plug](https://github.com/junegunn/vim-plug)
 Some server are required due the LSP configuration. Please install the following server:
 
 - [Python](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright)
+- [Better Grep](https://github.com/ggreer/the_silver_searcher)
 
 ## Linux
 

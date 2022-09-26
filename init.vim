@@ -553,6 +553,7 @@ Plug 'tpope/vim-surround'               " Add text object for surrender
 Plug 'editorconfig/editorconfig-vim'    " Estandard configuration base on .config file
 Plug 'nvim-lua/plenary.nvim'            " Lua libraries, base for other plugins
 Plug 'maxbrunsfeld/vim-yankstack'       " Improve yank
+Plug 'mileszs/ack.vim'
 
 """"""""""""""""""""""""""""""
 " => Support for programers
