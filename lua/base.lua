@@ -5,7 +5,7 @@ vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 
 vim.wo.number = true
-
+vim.opt.termguicolors = true
 vim.opt.title = true
 vim.opt.autoindent = true
 vim.opt.smartindent = true
@@ -18,8 +18,8 @@ vim.opt.expandtab = true
 vim.opt.scrolloff = 10
 vim.opt.shell = 'powershell'
 vim.opt.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
-vim.opt.shellquote='"'
-vim.opt.shellxquote=''
+vim.opt.shellquote = '"'
+vim.opt.shellxquote = ''
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 vim.opt.inccommand = 'split'
 vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
@@ -31,7 +31,7 @@ vim.opt.wrap = false -- No Wrap lines
 vim.opt.backspace = { 'start', 'eol', 'indent' }
 vim.opt.path:append { '**' } -- Finding files - Search down into subfolders
 vim.opt.wildignore:append { '*/node_modules/*' }
-vim.opt.relativenumber=true
+vim.opt.relativenumber = true
 
 -- Undercurl
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
@@ -39,8 +39,8 @@ vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
 -- Turn off paste mode when leaving insert
 vim.api.nvim_create_autocmd("InsertLeave", {
-  pattern = '*',
-  command = "set nopaste"
+	pattern = '*',
+	command = "set nopaste"
 })
 
 -- Add asterisks in block comments
