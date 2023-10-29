@@ -66,4 +66,5 @@ packer.startup(function(use)
       "Gdelete", "Gremove", "Gbrowse", "Gstatus"
     },
   }
+  use 'editorconfig/editorconfig-vim'
 end)
