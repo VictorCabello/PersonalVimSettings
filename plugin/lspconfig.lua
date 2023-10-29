@@ -67,6 +67,11 @@ protocol.CompletionItemKind = {
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
+nvim_lsp.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities
+}
+
 nvim_lsp.flow.setup {
   on_attach = on_attach,
   capabilities = capabilities
@@ -135,3 +140,17 @@ vim.diagnostic.config({
     source = "always", -- Or "if_many"
   },
 })
+
+nvim_lsp.pyright.setup {}
+
+
+
+local MY_FQBN = "arduino:avr:nano"
+nvim_lsp.arduino_language_server.setup {
+  cmd = {
+    "arduino-language-server",
+    "-cli-config", "C:\\Users\\vmeca\\AppData\\Local\\Arduino15\\arduino-cli.yaml",
+    "-fqbn",
+    MY_FQBN
+  }
+}

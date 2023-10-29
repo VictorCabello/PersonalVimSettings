@@ -17,6 +17,6 @@ keymap.set('n', '<C-h>', '<C-W>h')
 keymap.set('n', '<C-l>', '<C-W>l')
 
 -- Useful mappings for managing tabs
-keymap.set('n', '<leader>tn', ':tabnew<cr>') 
-keymap.set('n', '<leader>to', ':tabonly<cr>') 
-keymap.set('n', '<leader>tc', ':tabclose<cr>') 
+keymap.set('n', '<leader>tn', ':tabnew<cr>')
+keymap.set('n', '<leader>to', ':tabonly<cr>')
+keymap.set('n', '<leader>tc', ':tabclose<cr>')

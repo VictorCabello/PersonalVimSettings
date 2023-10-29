@@ -51,4 +51,19 @@ packer.startup(function(use)
   use 'dinhhuy258/git.nvim' -- For git blame & browse
   use 'lukas-reineke/indent-blankline.nvim'
   use 'mattn/emmet-vim'
+  use { 'epwalsh/obsidian.nvim',
+    requires = {
+      'godlygeek/tabular',
+      'preservim/vim-markdown'
+    }
+  }
+  use {
+    "tpope/vim-fugitive",
+    opt = true,
+    cmd = {
+      "G", "Git", "Gdiffsplit", "Gvdiffsplit", "Gedit", "Gsplit",
+      "Gread", "Gwrite", "Ggrep", "Glgrep", "Gmove",
+      "Gdelete", "Gremove", "Gbrowse", "Gstatus"
+    },
+  }
 end)
