@@ -67,4 +67,5 @@ packer.startup(function(use)
     },
   }
   use 'editorconfig/editorconfig-vim'
+  use 'kylechui/nvim-surround'
 end)
