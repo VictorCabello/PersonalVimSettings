@@ -25,65 +25,47 @@ Some server are required due the LSP configuration. Please install the following
 $ git clone git@github.com:VictorCabello/PersonalVimSettings.git ~/.config/nvim
 ```
 
-# Maps Cheat Sheet
+# Default Maps
 
-In this section I would like to document the different maps that are already implemented on my settings.
+| Mode | Map | Action |
+|------|-----|--------|
+| Normal | <leader>cd | Change to the dir of current file |
+| Normal | <leader>w | Save the current file |
+| Normal | <leader>gb | Show git blame |
+| Normal | <leader>gd | Go to definition |
+| Normal | <leader>gy | Go to type definition |
+| Normal | <leader>gi | Go to implementation |
+| Normal | <leader>gr | Go to references |
+| Normal | K | Show documentation |
+| Normal | <leader>rn | Rename |
+| Normal | <leader>f | Format selected |
+| Normal | <leader>a | Code action |
+| Normal | <leader>ac | Code action in cursor position |
+| Normal | <leader>as | Code action in all file |
+| Normal | <leader>qf | Quickfix action on current cursor position|
+| Normal | <leader>re | Apply code refactor |
+| Normal | <leader>r | Apply code refactor on selection |
+| Normal | <C-s> | Range select |
+| Normal | <leader>y | Yank list |
+| Normal | <leader>f | Find a file |
+| Normal | \\\\ | Find a buffer |
+| Normal | <leader>t | Find a tag |
+| Normal | <leader><leader>t | Resume last find |
+| Normal | <leader>e | Find diagnostic |
+| Normal | <leader>r | Live grep |
+| Normal | <leader>sf | File browser |
 
-    <leader>w         Quick Save 
-    *                 On visual mode search current selection
-    #                 On visual mode search current selection
-    <space>           Find until the end of the document           
-    Crl-<space>       Find until the begining of the document           
-    <leader><cr>      Clear search findings
-    <C-j>             Move between windows down
-    <C-k>             Move between windows up
-    <C-h>             Move between windows rigth
-    <C-l>             Move between windows left
-    <leader>bd        Close the current buffer
-    <leader>ba        Close all the buffers
-    <leader>l         Next buffer
-    <leader>h         Previous buffer
-    <leader>tn        New Tab
-    <leader>to        Close other tabs
-    <leader>tc        Close current tab
-    <leader>tm        Move Tab
-    <leader>t<leader> Next Tab
-    <leader>tl        move to last tab
-    <leader>te        Opens a new tab with the current buffer's path
-    <leader>cd        Switch CWD to the directory of the open buffer
-    <leader>ss        Pressing ,ss will toggle and untoggle spell checking
-    <leader>sn        ]s
-    <leader>sp        [s
-    <leader>sa        zg
-    <leader>s?        z=
-    <M-j>             Move a line of text using ALT+[jk] or Command+[jk] on mac
-    <M-k>             Move a line of text using ALT+[jk] or Command+[jk] on mac
-    <M-j>             Move a line of text using ALT+[jk] or Command+[jk] on mac
-    <M-k>             Move a line of text using ALT+[jk] or Command+[jk] on mac
-    <leader>nn        Open file tree on the current path
-    <leader>nb        Open file tree on the bookmarks
-    <leader>nf        Open file tree on the path of the active file
-    <leader>z         Write without distractions or comeback to normality
-    <leader>zl        More focus
-    <leader>a         Enable/disable the linter
-    <Leader>m         Remove Window ^M
-    <leader>q         Open buffer for scribble
-    <leader>x         Open markdown buffer for scribble
-    <leader>pp        Toggle paste mode on and off
-    <leader>e         Quick edit vim configs
-    <leader>o         Show open buffers
-    <leader>f         Show resent files
-    <C-p> or <C-n>    Sustitue paste for older o newer
-    <leader>nn        Open/close File Browser
-    <leader>nb        Open/close bookmarks
-    <leader>nf        Open/close File Browser with current file
+# Surround
 
+```
 
-
-
-
-# Special thanks
-
-I took a lot of configurations from [amix](https://github.com/amix/vimrc), I really recommend you to take a look on his repo and check the way that he organize his settings, it is really awesome.
-
-In the other hand I really like the plugin [vim-plug](https://github.com/junegunn/vim-plug), to make my configuration portable I just copy its main configuration file but I really recommend to take a look on its repo to understand all the nice features that vim-plug provide.
+    Old text                    Command         New text
+--------------------------------------------------------------------------------
+    surr*ound_words             ysiw)           (surround_words)
+    *make strings               ys$"            "make strings"
+    [delete ar*ound me!]        ds]             delete around me!
+    remove <b>HTML t*ags</b>    dst             remove HTML tags
+    'change quot*es'            cs'"            "change quotes"
+    <b>or tag* types</b>        csth1<CR>       <h1>or tag types</h1>
+    delete(functi*on calls)     dsf             function calls
+```
