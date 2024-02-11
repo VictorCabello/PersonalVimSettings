@@ -155,6 +155,11 @@ let lspServers = [#{
 \    path: 'powershell',
 \    args: ['vim-language-server.ps1', '--stdio'],
 \  }, #{
+\    name: 'pythonlang',
+\    filetype: ['python'],
+\    path: 'powershell',
+\    args: ['jedi-language-server.exe'],
+\  }, #{
 \    name: 'marksman',
 \    filetype: ['markdown'],
 \    path: 'powershell',
@@ -163,7 +168,6 @@ let lspServers = [#{
 \  }]
 autocmd VimEnter * call LspAddServer(lspServers)
 " }}}
-
 
 " Mappings {{{
 
