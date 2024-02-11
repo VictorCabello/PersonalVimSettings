@@ -49,6 +49,13 @@ endif
 
 set grepprg=git\ grep\ -n
 
+" Better command line completion
+set history=200
+set wildmenu
+set wildmode=full
+set wildignore+=*.o,*~,*.pyc,*/.DS_Store
+set wildignore+=*/Library/*,*/node_modules/*,*/.git/*,*/.hg/*,*/.svn/*
+
 " }}}
 
 " Plugins {{{
@@ -110,12 +117,6 @@ let g:lightline.active = {
             \ 'right': [
             \ [ 'lineinfo' ], [ 'percent' ], [ 'fileformat', 'fileencoding', 'filetype' ] ] }
 
-" Better command line completion
-set history=200
-set wildmenu
-set wildmode=full
-set wildignore+=*.o,*~,*.pyc,*/.DS_Store
-set wildignore+=*/Library/*,*/node_modules/*,*/.git/*,*/.hg/*,*/.svn/*
 
 " mouse support
 set mouse=a
@@ -148,22 +149,22 @@ let lspServers = [#{
 \    name: 'typescriptlang',
 \    filetype: ['javascript', 'typescript'],
 \    path: 'powershell',
-\    args: ['typescript-language-server.ps1', '--stdio'],
+\    args: ['typescript-language-server', '--stdio'],
 \  }, #{
 \    name: 'vimls',
 \    filetype: ['vim'],
 \    path: 'powershell',
-\    args: ['vim-language-server.ps1', '--stdio'],
+\    args: ['vim-language-server', '--stdio'],
 \  }, #{
 \    name: 'pythonlang',
 \    filetype: ['python'],
 \    path: 'powershell',
-\    args: ['jedi-language-server.exe'],
+\    args: ['jedi-language-server'],
 \  }, #{
 \    name: 'marksman',
 \    filetype: ['markdown'],
 \    path: 'powershell',
-\    args: ['marksman.exe', 'server'],
+\    args: ['marksman', 'server'],
 \    syncInit: v:true 
 \  }]
 autocmd VimEnter * call LspAddServer(lspServers)
