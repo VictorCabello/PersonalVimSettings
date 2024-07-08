@@ -82,6 +82,10 @@ return {
     lspconfig.html.setup{
       capabilities = capabilities,
     }
+
+    lspconfig.gdscript.setup{
+      capabilities = capabilities,
+    }
     
     local lspconfig = require('lspconfig')
     local configs = require('lspconfig/configs')
