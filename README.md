@@ -13,16 +13,16 @@ Each lsp server should install its implementation.
 Firs you need to install the following dependencies.
 
 ```pwsh
-PS>scoop install make
-PS>scoop install mingw
-PS>npm install -g emmet-ls
-PS>pip install "python-lsp-server[all]"
+scoop install make
+scoop install mingw
+npm install -g emmet-ls
+pip install "python-lsp-server[all]"
 ```
 
 And then you can use the configuration.
 
 ```pwsh
-PS> git clone https://github.com/VictorCabello/PersonalVimSettings.git $env:LOCALAPPDATA\nvim
-PS> cd $env:LOCALAPPDATA\nvim
-PS> git checkout nvim
+git clone https://github.com/VictorCabello/PersonalVimSettings.git $env:LOCALAPPDATA\nvim
+cd $env:LOCALAPPDATA\nvim
+git checkout nvim
 ```
