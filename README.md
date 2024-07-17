@@ -15,6 +15,7 @@ Firs you need to install the following dependencies.
 ```pwsh
 scoop install make
 scoop install mingw
+scoop install fzf
 npm install -g emmet-ls
 pip install "python-lsp-server[all]"
 ```
