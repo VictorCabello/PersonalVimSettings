@@ -74,6 +74,7 @@ return {
       }
     }
 
+    require'lspconfig'.pyright.setup{}
 
     lspconfig.pylsp.setup{
       capabilities = capabilities,

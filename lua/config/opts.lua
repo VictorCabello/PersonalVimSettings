@@ -2,8 +2,8 @@
 vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
-
-vim.opt.number = true
+vim.o.clipboard = "unnamedplus"
+vim.opt.conceallevel = 2
 vim.opt.relativenumber = true
 vim.opt.termguicolors = true
 vim.opt.title = true
@@ -16,10 +16,6 @@ vim.opt.cmdheight = 1
 vim.opt.laststatus = 2
 vim.opt.expandtab = true
 vim.opt.scrolloff = 10
-vim.opt.shell = 'pwsh'
-vim.opt.shellcmdflag = '-nologo -noprofile -ExecutionPolicy RemoteSigned -command'
-vim.opt.shellquote = '"'
-vim.opt.shellxquote = ''
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 vim.opt.inccommand = 'split'
 vim.opt.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
