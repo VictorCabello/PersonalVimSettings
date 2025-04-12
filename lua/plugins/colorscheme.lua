@@ -1,54 +1,132 @@
 return {
-  "catppuccin/nvim", name = "catppuccin", priority = 1000,
-  config =function ()
+  {
+    'maxmx03/dracula.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function ()
+      ---@type dracula
+      local dracula = require "dracula"
 
-    require("catppuccin").setup({
-      flavour = "macchiato", -- latte, frappe, macchiato, mocha
-      transparent_background = false, -- disables setting the background color.
-      show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-      term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
-      dim_inactive = {
-        enabled = false, -- dims the background color of inactive window
-        shade = "dark",
-        percentage = 0.15, -- percentage of the shade to apply to the inactive window
+      dracula.setup({
+      styles = {
+        Type = {},
+        Function = {},
+        Parameter = {},
+        Property = {},
+        Comment = {},
+        String = {},
+        Keyword = {},
+        Identifier = {},
+        Constant = {},
       },
-      no_italic = false, -- Force no italic
-      no_bold = false, -- Force no bold
-      no_underline = false, -- Force no underline
-      styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-        comments = { "italic" }, -- Change the style of comments
-        conditionals = { "italic" },
-        loops = {},
-        functions = {},
-        keywords = {},
-        strings = {},
-        variables = {},
-        numbers = {},
-        booleans = {},
-        properties = {},
-        types = {},
-        operators = {},
-        -- miscs = {}, -- Uncomment to turn off hard-coded styles
-      },
-      color_overrides = {},
-      custom_highlights = {},
-      default_integrations = true,
-      integrations = {
-        cmp = true,
-        gitsigns = true,
-        nvimtree = true,
-        treesitter = true,
-        notify = false,
-        mini = {
-          enabled = true,
-          indentscope_color = "",
+      transparent = false,
+      on_colors = function (colors, color)
+        ---@type dracula.palette
+        return {
+          -- override or create new colors
+          mycolor = "#ffffff",
+          -- mycolor = 0xffffff,
+        }
+      end,
+      on_highlights = function (colors, color)
+        ---@type dracula.highlights
+        return {
+          ---@type vim.api.keyset.highlight
+          Normal = { fg = colors.mycolor }
+        }
+      end,
+      plugins = {
+        ["nvim-treesitter"] = true,
+        ["rainbow-delimiters"] = true,
+        ["nvim-lspconfig"] = true,
+        ["nvim-navic"] = true,
+        ["nvim-cmp"] = true,
+        ["indent-blankline.nvim"] = true,
+        ["neo-tree.nvim"] = true,
+        ["nvim-tree.lua"] = true,
+        ["which-key.nvim"] = true,
+        ["dashboard-nvim"] = true,
+        ["gitsigns.nvim"] = true,
+        ["neogit"] = true,
+        ["todo-comments.nvim"] = true,
+        ["lazy.nvim"] = true,
+        ["telescope.nvim"] = true,
+        ["noice.nvim"] = true,
+        ["hop.nvim"] = true,
+        ["mini.statusline"] = true,
+        ["mini.tabline"] = true,
+        ["mini.starter"] = true,
+        ["mini.cursorword"] = true,
+        ['bufferline.nvim'] = true,
+      }
+      })
+      vim.cmd.colorscheme 'dracula'
+      vim.cmd.colorscheme 'dracula-soft'
+    end
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    opts = {
+      options = {
+        theme = vim.g.colors_name,
+        refresh = {
+          statusline = 1000,
         },
-        -- For more plugins integrations please scroll down (https://github.com/cnatppuccin/nvim#integrations)
       },
-    })
-vim.cmd.colorscheme "catppuccin"
-  end
+    },
+  }
 }
+-- return {
+--   "catppuccin/nvim", name = "catppuccin", priority = 1000,
+--   config =function ()
+-- 
+--     require("catppuccin").setup({
+--       flavour = "macchiato", -- latte, frappe, macchiato, mocha
+--       transparent_background = false, -- disables setting the background color.
+--       show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
+--       term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
+--       dim_inactive = {
+--         enabled = false, -- dims the background color of inactive window
+--         shade = "dark",
+--         percentage = 0.15, -- percentage of the shade to apply to the inactive window
+--       },
+--       no_italic = false, -- Force no italic
+--       no_bold = false, -- Force no bold
+--       no_underline = false, -- Force no underline
+--       styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
+--         comments = { "italic" }, -- Change the style of comments
+--         conditionals = { "italic" },
+--         loops = {},
+--         functions = {},
+--         keywords = {},
+--         strings = {},
+--         variables = {},
+--         numbers = {},
+--         booleans = {},
+--         properties = {},
+--         types = {},
+--         operators = {},
+--         -- miscs = {}, -- Uncomment to turn off hard-coded styles
+--       },
+--       color_overrides = {},
+--       custom_highlights = {},
+--       default_integrations = true,
+--       integrations = {
+--         cmp = true,
+--         gitsigns = true,
+--         nvimtree = true,
+--         treesitter = true,
+--         notify = false,
+--         mini = {
+--           enabled = true,
+--           indentscope_color = "",
+--         },
+--         -- For more plugins integrations please scroll down (https://github.com/cnatppuccin/nvim#integrations)
+--       },
+--     })
+-- vim.cmd.colorscheme "catppuccin"
+--   end
+-- }
 -- return {
   --   "rebelot/kanagawa.nvim",
   --   config = function()
