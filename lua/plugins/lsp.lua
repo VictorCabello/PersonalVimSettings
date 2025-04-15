@@ -84,8 +84,8 @@ return {
       capabilities = capabilities,
     }
 
-    local lspconfig = require('lspconfig')
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    lspconfig = require('lspconfig')
+    capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
 
     lspconfig.emmet_ls.setup({
@@ -104,7 +104,7 @@ return {
 
 
 
-    local lspconfig = require'lspconfig'
+    lspconfig = require'lspconfig'
     lspconfig.ccls.setup {
       init_options = {
         compilationDatabaseDirectory = "build";
