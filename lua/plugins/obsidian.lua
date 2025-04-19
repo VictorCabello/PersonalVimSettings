@@ -24,6 +24,7 @@ return {
         nvim_cmp = true,
         min_chars = 2,
       },
+      ui = { enable = false},
       mappings = {
         ["<cr>"] = {
           action = function ()
