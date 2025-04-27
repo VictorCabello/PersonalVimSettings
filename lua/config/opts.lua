@@ -1,4 +1,3 @@
-
 vim.scriptencoding = 'utf-8'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
@@ -29,25 +28,3 @@ vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a T
 vim.o.softtabstop = 4 -- Number of spaces inserted instead of a TAB character
 vim.o.shiftwidth = 4 -- Number of spaces inserted when indenting
 vim.opt.wrap = true -- No Wrap lines
-
-
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', function()
-  vim.diagnostic.jump({count = -1, float= true })
-end, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d',  function()
-  vim.diagnostic.jump({count = 1, float= true })
-end, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
-vim.keymap.set('n', '<leader>w', ':w<cr>', { desc = 'save file'} )
-vim.keymap.set('i', '<leader>w', '<C-o>:w<cr>', { desc = 'save file'} )
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', 'hh', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-vim.keymap.set('i', 'hh', '<Esc>', { desc = 'Exit terminal mode' })
