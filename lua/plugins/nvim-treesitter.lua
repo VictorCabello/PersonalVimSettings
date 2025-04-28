@@ -9,8 +9,11 @@ local M = {
     end,
     config = function ()
       require('nvim-treesitter.configs').setup({
-        highlight = { enable = true }
+        highlight = { enable = true },
+        indent = { enable = true }
       })
+      vim.wo.foldmethod = 'expr'
+      vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
     end
 }
 
