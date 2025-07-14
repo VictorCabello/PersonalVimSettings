@@ -1,121 +1,141 @@
-
-local attachMaps = function()
-
-  local telescope = require('telescope.builtin')
-  vim.api.nvim_create_autocmd('LspAttach', {
-    group = vim.api.nvim_create_augroup('victor-lsp-attach', { clear = true }),
-    callback = function(event)
-      local map = function(keys, func, desc)
-        vim.keymap.set('n', keys, func, {buffer =event.buf, desc = 'LSP: ' .. desc})
-      end
-      map('gd', telescope.lsp_definitions, '[g]oto [d]efinitions')
-      map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-
-      -- Jump to the implementation of the word under your cursor.
-      --  Useful when your language has ways of declaring types without an actual implementation.
-      map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-
-      -- Jump to the type of the word under your cursor.
-      --  Useful when you're not sure what type a variable is and you want to see
-      --  the definition of its *type*, not where it was *defined*.
-      map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
-
-      -- Fuzzy find all the symbols in your current document.
-      --  Symbols are things like variables, functions, types, etc.
-      map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-
-      -- Fuzzy find all the symbols in your current workspace
-      --  Similar to document symbols, except searches over your whole project.
-      map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-      -- Rename the variable under your cursor
-      --  Most Language Servers support renaming across files, etc.
-      map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-
-      -- Execute a code action, usually your cursor needs to be on top of an error
-      -- or a suggestion from your LSP for this to activate.
-      map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
-      -- Opens a popup that displays documentation about the word under your cursor
-      --  See `:help K` for why this keymap
-      map('K', vim.lsp.buf.hover, 'Hover Documentation')
-
-      -- WARN: This is not Goto Definition, this is Goto Declaration.
-      --  For example, in C this would take you to the header
-      map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-    end
-  })
-end
-
 return {
-  "neovim/nvim-lspconfig",
-  dependencies = {
-  },
-  config = function()
-    local lspconfig = require('lspconfig')
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-    attachMaps()
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+    },
+    config = function()
+      vim.lsp.enable('pyright')
+      vim.lsp.enable('pylsp')
+      vim.lsp.enable('lua_ls')
+      vim.lsp.config('lua_ls', {
+        on_init = function(client)
+          if client.workspace_folders then
+            local path = client.workspace_folders[1].name
+            if
+              path ~= vim.fn.stdpath('config')
+              and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc'))
+            then
+              return
+            end
+          end
 
-    lspconfig.lua_ls.setup{
-      capabilities = capabilities,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" },
-          },
-          workspace = {
-            library = {
-              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-              [vim.fn.stdpath("config") .. "/lua"] = true,
+          client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
+            runtime = {
+              -- Tell the language server which version of Lua you're using (most
+              -- likely LuaJIT in the case of Neovim)
+              version = 'LuaJIT',
+              -- Tell the language server how to find Lua modules same way as Neovim
+              -- (see `:h lua-module-load`)
+              path = {
+                'lua/?.lua',
+                'lua/?/init.lua',
+              },
+            },
+            -- Make the server aware of Neovim runtime files
+            workspace = {
+              checkThirdParty = false,
+              library = {
+                vim.env.VIMRUNTIME
+                -- Depending on the usage, you might want to add additional paths
+                -- here.
+                -- '${3rd}/luv/library'
+                -- '${3rd}/busted/library'
+              }
+              -- Or pull in all of 'runtimepath'.
+              -- NOTE: this is a lot slower and will cause issues when working on
+              -- your own configuration.
+              -- See https://github.com/neovim/nvim-lspconfig/issues/3189
+              -- library = {
+              --   vim.api.nvim_get_runtime_file('', true),
+              -- }
             }
-          }
+          })
+        end,
+        settings = {
+          Lua = {}
         }
-      }
-    }
+      })
+    end
+  },
+  {
+    'saghen/blink.cmp',
+    -- optional: provides snippets for the snippet source
+    dependencies = { 
+      'rafamadriz/friendly-snippets',
+      "saghen/blink.compat",
+      "giuxtaposition/blink-cmp-copilot",
+    },
 
-    require'lspconfig'.pyright.setup{}
+    -- use a release tag to download pre-built binaries
+    version = '1.*',
+    -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
+    -- build = 'cargo build --release',
+    -- If you use nix, you can build from source using latest nightly rust with:
+    -- build = 'nix run .#build-plugin',
 
-    lspconfig.pylsp.setup{
-      capabilities = capabilities,
-    }
+    ---@module 'blink.cmp'
+    ---@type blink.cmp.Config
+    opts = {
+      -- 'default' (recommended) for mappings similar to built-in completions (C-y to accept)
+      -- 'super-tab' for mappings similar to vscode (tab to accept)
+      -- 'enter' for enter to accept
+      -- 'none' for no mappings
+      --
+      -- All presets have the following mappings:
+      -- C-space: Open menu or open docs if already open
+      -- C-n/C-p or Up/Down: Select next/previous item
+      -- C-e: Hide menu
+      -- C-k: Toggle signature help (if signature.enabled = true)
+      --
+      -- See :h blink-cmp-config-keymap for defining your own keymap
+      keymap = { preset = 'default' },
 
-    lspconfig.html.setup{
-      capabilities = capabilities,
-    }
 
-    lspconfig = require('lspconfig')
-    capabilities = vim.lsp.protocol.make_client_capabilities()
-    capabilities.textDocument.completion.completionItem.snippetSupport = true
+      -- (Default) Only show the documentation popup when manually triggered
+      completion = { documentation = { auto_show = false } },
 
-    lspconfig.emmet_ls.setup({
-      -- on_attach = on_attach,
-      capabilities = capabilities,
-      filetypes = { "css", "eruby", "html", "javascript", "javascriptreact", "less", "sass", "scss", "svelte", "pug", "typescriptreact", "vue" },
-      init_options = {
-        html = {
-          options = {
-            -- For possible options, see: https://github.com/emmetio/emmet/blob/master/src/config.ts#L79-L267
-            ["bem.enabled"] = true,
+      -- Default list of enabled providers defined so that you can extend it
+      -- elsewhere in your config, without redefining it, due to `opts_extend`
+      sources = {
+        default = {
+          "obsidian",
+          "obsidian_new",
+          "obsidian_tags",
+          'lsp',
+          'path',
+          'snippets',
+          'buffer',
+          'copilot'
+        },
+
+        providers = {
+          copilot = {
+            name = "copilot",
+            module = "blink-cmp-copilot",
+            score_offset = 100,
+            async = true,
+          },
+          obsidian = {
+            name = "obsidian",
+            module = "blink.compat.source",
+          },
+          obsidian_new = {
+            name = "obsidian_new",
+            module = "blink.compat.source",
+          },
+          obsidian_tags = {
+            name = "obsidian_tags",
+            module = "blink.compat.source",
           },
         },
-      }
-    })
-
-
-
-    lspconfig = require'lspconfig'
-    lspconfig.ccls.setup {
-      init_options = {
-        compilationDatabaseDirectory = "build";
-        index = {
-          threads = 0;
-        };
-        clang = {
-          excludeArgs = { "-frounding-math"} ;
-        };
-      }
-    }
-
-  end
+      },
+      -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
+      -- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
+      -- when the Rust fuzzy matcher is not available, by using `implementation = "prefer_rust"`
+      --
+      -- See the fuzzy documentation for more information
+      fuzzy = { implementation = "prefer_rust_with_warning" }
+    },
+    opts_extend = { "sources.default" }
+  }
 }

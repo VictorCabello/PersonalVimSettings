@@ -3,6 +3,7 @@ vim.opt.encoding = 'utf-8'
 vim.opt.fileencoding = 'utf-8'
 vim.o.clipboard = "unnamedplus"
 vim.opt.conceallevel = 2
+vim.opt.foldlevel = 99
 vim.opt.relativenumber = true
 vim.opt.number = true
 vim.opt.termguicolors = true

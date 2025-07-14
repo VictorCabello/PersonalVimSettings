@@ -1,5 +1,6 @@
+local myNotesPath=os.getenv("NOTES_DIR")
 return {
-  "epwalsh/obsidian.nvim",
+  "obsidian-nvim/obsidian.nvim",
   version = "*",  -- recommended, use latest release instead of latest commit
   ft = "markdown",
   -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
@@ -12,7 +13,7 @@ return {
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
-
+      -- { "hrsh7th/nvim-cmp", }
       -- see below for full list of optional dependencies 👇
     },
     opts = {
@@ -21,7 +22,8 @@ return {
       end,
       notes_subdir = "000 Entrada",
       completion = {
-        nvim_cmp = true,
+        nvim_cmp = false,
+        blink = true,
         min_chars = 2,
       },
       ui = { enable = false},
@@ -36,7 +38,7 @@ return {
       workspaces = {
         {
           name = "personal",
-          path = "/home/victorcabello/OneDrive/cerebro_digital",
+          path = myNotesPath,
         },
       },
       templates = {
@@ -124,4 +126,13 @@ return {
         end,
       },
     },
+    config = function(_, opts)
+      require("obsidian").setup(opts)
+
+      -- HACK: fix error, disable completion.nvim_cmp option, manually register sources
+      local cmp = require("cmp")
+      cmp.register_source("obsidian", require("cmp_obsidian").new())
+      cmp.register_source("obsidian_new", require("cmp_obsidian_new").new())
+      cmp.register_source("obsidian_tags", require("cmp_obsidian_tags").new())
+    end,
   }
