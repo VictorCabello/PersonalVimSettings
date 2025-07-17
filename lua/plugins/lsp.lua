@@ -5,7 +5,6 @@ return {
     },
     config = function()
       vim.lsp.enable('pyright')
-      vim.lsp.enable('pylsp')
       vim.lsp.enable('lua_ls')
       vim.lsp.config('lua_ls', {
         on_init = function(client)
@@ -55,6 +54,18 @@ return {
           Lua = {}
         }
       })
+
+      vim.keymap.set(
+        'n', '<leader>e',
+        vim.diagnostic.open_float,
+        { desc = 'Show diagnostic [E]rror messages' }
+      )
+
+      vim.keymap.set(
+        'n', '<leader>q',
+        vim.diagnostic.setloclist,
+        { desc = 'Open diagnostic [Q]uickfix list' }
+      )
     end
   },
   {
@@ -136,6 +147,13 @@ return {
       -- See the fuzzy documentation for more information
       fuzzy = { implementation = "prefer_rust_with_warning" }
     },
-    opts_extend = { "sources.default" }
+    opts_extend = { "sources.default" },
+    config = function(_, opts)
+      require("blink.cmp").setup(opts)
+
+      vim.keymap.set('n', 'gd', function()
+        vim.lsp.buf.type_definition()
+      end, { desc = 'Toggle docs' })
+    end
   }
 }
