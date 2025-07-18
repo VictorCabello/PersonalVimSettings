@@ -5,7 +5,6 @@ return {
     },
     config = function()
       vim.lsp.enable('pyright')
-      vim.lsp.enable('lua_ls')
       vim.lsp.config('lua_ls', {
         on_init = function(client)
           if client.workspace_folders then
@@ -54,6 +53,7 @@ return {
           Lua = {}
         }
       })
+      vim.lsp.enable('lua_ls')
 
       vim.keymap.set(
         'n', '<leader>e',
@@ -116,6 +116,8 @@ return {
           'path',
           'snippets',
           'buffer',
+          'cmdline',
+          'omni',
           'copilot'
         },
 
