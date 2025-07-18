@@ -1,5 +1,6 @@
 require("config.lazy")
 require("config.opts")
+require("config.lsp")
 require("config.file_manager")
 require("config.global_keymaps")
 require("config.terminal")
