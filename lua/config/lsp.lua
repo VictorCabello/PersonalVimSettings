@@ -12,3 +12,8 @@ vim.keymap.set(
   vim.diagnostic.setloclist,
   { desc = 'Open diagnostic [Q]uickfix list' }
 )
+
+vim.keymap.set(
+  'n', 'gd', '<C-]>',
+  { desc = 'Go to [D]efinition' }
+)

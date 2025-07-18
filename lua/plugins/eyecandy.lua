@@ -69,8 +69,15 @@ local indentation_highlighting = {
   end,
 }
 
-return {
-  treesitter,
-  scheme,
-  indentation_highlighting
-}
+local is_full = not vim.g.is_mini
+
+if is_full then
+  return {
+    treesitter,
+    scheme,
+    indentation_highlighting
+  }
+else
+  return { }
+end
+
