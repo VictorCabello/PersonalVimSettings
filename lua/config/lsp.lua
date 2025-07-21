@@ -1,19 +1,20 @@
-require('config.lsp_python')
-require('config.lsp_lua')
+vim.keymap.set('n',
+  'gd',
+  "<C-]>",
+  { desc = 'Go to definition' })
 
 vim.keymap.set(
   'n', '<leader>e',
-  vim.diagnostic.open_float,
+  function ()
+    vim.diagnostic.open_float()
+  end,
   { desc = 'Show diagnostic [E]rror messages' }
 )
 
 vim.keymap.set(
   'n', '<leader>q',
-  vim.diagnostic.setloclist,
+  function ()
+    vim.diagnostic.setloclist()
+  end,
   { desc = 'Open diagnostic [Q]uickfix list' }
-)
-
-vim.keymap.set(
-  'n', 'gd', '<C-]>',
-  { desc = 'Go to [D]efinition' }
 )

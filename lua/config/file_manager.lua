@@ -1,10 +1,10 @@
-local no_banner = 0
-local tree_style = 3
-local open_in_prview = 4
-local new_preview_on_right = 1
+-- Netrw is the default file manager in Neovim and it works very
+-- well to navigate files but some most of the times I need a 
+-- tree to navigate the files an this config help me with that.
 
-vim.g.netrw_banner = no_banner
-vim.g.netrw_liststyle = tree_style
-vim.g.netrw_browse_split = open_in_prview
-vim.g.netrw_preview = new_preview_on_right
-vim.g.netrw_winsize = 80
+vim.g.netrw_banner = 0 -- by default, Netrw shows a banner but I don't like it
+vim.g.netrw_liststyle = 3 -- tree view
+vim.g.netrw_altv = 1
+vim.g.netrw_browse_split = 4 -- open in previous window
+vim.g.netrw_preview = 1 -- enable preview of files
+vim.g.netrw_winsize = 80 -- set the width of the Netrw window to 20% of the screen

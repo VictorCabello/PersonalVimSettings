@@ -11,7 +11,14 @@ return {
     },
     -- See Commands section for default commands if you want to lazy load on them
     config = function ()
-      require("copilot").setup({})
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+        filetypes = {
+          yaml = true,
+          json = true,
+        },
+      })
       require("CopilotChat").setup({})
     end
   },
