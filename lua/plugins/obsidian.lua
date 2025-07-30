@@ -13,6 +13,7 @@ return {
     dependencies = {
       -- Required.
       "nvim-lua/plenary.nvim",
+      'saghen/blink.cmp',
       -- { "hrsh7th/nvim-cmp", }
       -- see below for full list of optional dependencies 👇
     },
@@ -27,7 +28,7 @@ return {
         blink = true,
         min_chars = 2,
       },
-      ui = { enable = false },
+      ui = { enable = true },
       callbacks = {
         -- This function is called when the user clicks on a link in a note.
         -- It can be used to open the link in a web browser or another application.
@@ -133,7 +134,7 @@ return {
     config = function(_, opts)
       require("obsidian").setup(opts)
 
-      -- -- HACK: fix error, disable completion.nvim_cmp option, manually register sources
+      -- HACK: fix error, disable completion.nvim_cmp option, manually register sources
       -- local cmp = require("cmp")
       -- cmp.register_source("obsidian", require("cmp_obsidian").new())
       -- cmp.register_source("obsidian_new", require("cmp_obsidian_new").new())
