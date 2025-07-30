@@ -21,19 +21,23 @@ return {
         vim.fn.jobstart({"xdg-open", url})
       end,
       notes_subdir = "000 Entrada",
+      legacy_commands = false,
       completion = {
         nvim_cmp = false,
         blink = true,
         min_chars = 2,
       },
-      ui = { enable = false},
-      mappings = {
-        ["<cr>"] = {
-          action = function ()
-            return require("obsidian").util.smart_action()
-          end,
-          opts = { buffer = true, expr = true },
-        },
+      ui = { enable = false },
+      callbacks = {
+        -- This function is called when the user clicks on a link in a note.
+        -- It can be used to open the link in a web browser or another application.
+        on_link_click = function(link)
+          if link:match("^https?://") then
+            vim.fn.jobstart({"xdg-open", link})
+          else
+            require("obsidian").util.smart_action(link)
+          end
+        end,
       },
       workspaces = {
         {
@@ -129,10 +133,10 @@ return {
     config = function(_, opts)
       require("obsidian").setup(opts)
 
-      -- HACK: fix error, disable completion.nvim_cmp option, manually register sources
-      local cmp = require("cmp")
-      cmp.register_source("obsidian", require("cmp_obsidian").new())
-      cmp.register_source("obsidian_new", require("cmp_obsidian_new").new())
-      cmp.register_source("obsidian_tags", require("cmp_obsidian_tags").new())
+      -- -- HACK: fix error, disable completion.nvim_cmp option, manually register sources
+      -- local cmp = require("cmp")
+      -- cmp.register_source("obsidian", require("cmp_obsidian").new())
+      -- cmp.register_source("obsidian_new", require("cmp_obsidian_new").new())
+      -- cmp.register_source("obsidian_tags", require("cmp_obsidian_tags").new())
     end,
   }

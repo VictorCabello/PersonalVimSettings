@@ -1,8 +1,12 @@
 return {
+  {
+    "https://github.com/neovim/nvim-lspconfig",
+  },
+  {
     'saghen/blink.cmp',
     -- optional: provides snippets for the snippet source
     dependencies = {
-        'rafamadriz/friendly-snippets',
+      'rafamadriz/friendly-snippets',
         "saghen/blink.compat",
         "giuxtaposition/blink-cmp-copilot",
     },
@@ -58,18 +62,18 @@ return {
                     score_offset = 100,
                     async = true,
                 },
-                obsidian = {
-                    name = "obsidian",
-                    module = "blink.compat.source",
-                },
-                obsidian_new = {
-                    name = "obsidian_new",
-                    module = "blink.compat.source",
-                },
-                obsidian_tags = {
-                    name = "obsidian_tags",
-                    module = "blink.compat.source",
-                },
+                -- obsidian = {
+                --     name = "obsidian",
+                --     module = "blink.compat.source",
+                -- },
+                -- obsidian_new = {
+                --     name = "obsidian_new",
+                --     module = "blink.compat.source",
+                -- },
+                -- obsidian_tags = {
+                --     name = "obsidian_tags",
+                --     module = "blink.compat.source",
+                -- },
             },
         },
         -- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
@@ -80,4 +84,5 @@ return {
         fuzzy = { implementation = "prefer_rust_with_warning" }
     },
     opts_extend = { "sources.default" }
+  }
 }
