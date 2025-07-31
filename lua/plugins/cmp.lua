@@ -3,7 +3,6 @@ local auto_cmp = {
   -- optional: provides snippets for the snippet source
   dependencies = {
     'rafamadriz/friendly-snippets',
-    "saghen/blink.compat",
     "giuxtaposition/blink-cmp-copilot",
   },
 
@@ -39,9 +38,6 @@ local auto_cmp = {
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = {
-        "obsidian",
-        "obsidian_new",
-        "obsidian_tags",
         'lsp',
         'path',
         'snippets',
@@ -51,24 +47,21 @@ local auto_cmp = {
         'copilot'
       },
 
+      per_filetype = {
+        obsidian = {
+          "obsidian",
+          "obsidian_new",
+          "obsidian_tags",
+        }
+      },
+
+
       providers = {
         copilot = {
           name = "copilot",
           module = "blink-cmp-copilot",
           score_offset = 100,
           async = true,
-        },
-        obsidian = {
-          name = "obsidian",
-          module = "blink.compat.source",
-        },
-        obsidian_new = {
-          name = "obsidian_new",
-          module = "blink.compat.source",
-        },
-        obsidian_tags = {
-          name = "obsidian_tags",
-          module = "blink.compat.source",
         },
       },
     },
@@ -82,6 +75,31 @@ local auto_cmp = {
   opts_extend = { "sources.default" },
   config = function(_, opts)
     require("blink.cmp").setup(opts)
+
+    vim.keymap.set('n',
+      'gd',
+      "<C-]>",
+      { desc = 'Go to definition' })
+
+    vim.keymap.set(
+      'n', '<leader>e',
+      function ()
+        vim.diagnostic.open_float()
+      end,
+      { desc = 'Show diagnostic [E]rror messages' }
+    )
+
+    vim.keymap.set(
+      'n', '<leader>q',
+      function ()
+        vim.diagnostic.setloclist()
+      end,
+      { desc = 'Open diagnostic [Q]uickfix list' }
+    )
+
+
+    require "config/lsp_lua"
+    vim.lsp.enable({'ts_ls', 'pyright', 'codebook'})
   end
 }
 return {

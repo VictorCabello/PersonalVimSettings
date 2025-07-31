@@ -6,9 +6,27 @@ local treesitter = {
         })()
 
 
-    end,
-    config = function ()
-      require('nvim-treesitter.configs').setup({
+  end,
+  config = function ()
+    require('nvim-treesitter.configs').setup({
+      ensure_installed = {
+          "c",
+          "lua",
+          "python",
+          "vimdoc",
+          "css",
+          "html",
+          "javascript",
+          "latex",
+          "norg",
+          "scss",
+          "svelte",
+          "tsx",
+          "typst",
+          "vue"
+        },
+
+
         highlight = { enable = true },
         indent = { enable = true }
       })
