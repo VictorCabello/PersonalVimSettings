@@ -1,7 +1,18 @@
+vim.pack.add({
+  {src='https://github.com/neovim/nvim-lspconfig'},
+  {src='https://github.com/nvim-treesitter/nvim-treesitter'},
+})
+
+
+vim.keymap.set('i',
+'<C- >',
+'<C-X><C-O>',
+{ desc = 'Trigger omnifunc completion (insert mode)' })
+
 vim.keymap.set('n',
-  'gd',
-  "<C-]>",
-  { desc = 'Go to definition' })
+'gd',
+"<C-]>",
+{ desc = 'Go to definition' })
 
 vim.keymap.set(
   'n', '<leader>e',
@@ -18,3 +29,14 @@ vim.keymap.set(
   end,
   { desc = 'Open diagnostic [Q]uickfix list' }
 )
+
+require('nvim-treesitter.configs').setup({
+  highlight = { enable = true },
+  indent = { enable = true }
+})
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldlevel = 20
+
+require "config/lsp_lua"
+vim.lsp.enable({'ts_ls', 'pyright', 'codebook'})

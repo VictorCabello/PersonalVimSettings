@@ -1,5 +1,0 @@
-require("config.lazy")
-require("config.opts")
-require("config.global_keymaps")
-require("config.terminal")
-require("config.file_manager")
