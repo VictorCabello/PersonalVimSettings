@@ -31,6 +31,23 @@ vim.keymap.set(
 )
 
 require('nvim-treesitter.configs').setup({
+  ensure_installed = {
+    "c",
+    "lua",
+    "python",
+    "vimdoc",
+    "css",
+    "html",
+    "javascript",
+    "latex",
+    "norg",
+    "scss",
+    "svelte",
+    "tsx",
+    "typst",
+    "diff",
+    "vue"
+  },
   highlight = { enable = true },
   indent = { enable = true }
 })
