@@ -8,7 +8,7 @@ vim.o.clipboard = "unnamedplus"
 
 vim.o.conceallevel = 2
 vim.o.foldlevel = 99
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 vim.o.number = true
 vim.o.wrap = true -- No Wrap lines
 
