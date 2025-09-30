@@ -1,8 +1,9 @@
 -- Colorscheme
-vim.cmd[[ color unokai ]]
--- vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
--- vim.api.nvim_set_hl(0, "NormalNC", { bg = "None" })
--- vim.api.nvim_set_hl(0, "EndBuffer", { bg = "None" })
+vim.cmd[[ color sorbet ]]
+-- -- vim.cmd[[ color unokai ]]
+vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
+vim.api.nvim_set_hl(0, "NormalNC", { bg = "None" })
+vim.api.nvim_set_hl(0, "EndBuffer", { bg = "None" })
 
 -- Encoding
 vim.scriptencoding = 'utf-8'
@@ -14,14 +15,14 @@ vim.o.clipboard = "unnamedplus"
 
 vim.o.conceallevel = 2
 vim.o.foldlevel = 99
-vim.o.relativenumber = true
+vim.o.relativenumber = false
 vim.o.number = true
 vim.o.wrap = true -- No Wrap lines
 
 vim.o.termguicolors = true
 vim.o.colorcolumn = "100"
 vim.o.signcolumn = "yes"
-vim.o.hlsearch = true
+vim.o.hlsearch = false
 vim.o.title = true
 vim.o.backup = false
 vim.o.showcmd = true

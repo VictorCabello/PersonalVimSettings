@@ -1,4 +1,5 @@
 require 'config/opts'
 require 'config/lsp'
-require 'config/picker'
-require 'config/copilot'
+-- Trying to use gimin
+-- require 'config/picker'
+-- require 'config/copilot'

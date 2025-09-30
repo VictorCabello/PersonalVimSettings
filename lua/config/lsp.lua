@@ -1,6 +1,7 @@
 vim.pack.add({
   {src='https://github.com/neovim/nvim-lspconfig'},
-  {src='https://github.com/nvim-treesitter/nvim-treesitter'},
+  {src='https://github.com/MeanderingProgrammer/render-markdown.nvim'},
+  {src='https://github.com/nvim-treesitter/nvim-treesitter', version='main'}
 })
 
 
@@ -30,30 +31,18 @@ vim.keymap.set(
   { desc = 'Open diagnostic [Q]uickfix list' }
 )
 
-require('nvim-treesitter.configs').setup({
-  ensure_installed = {
-    "c",
-    "lua",
-    "python",
-    "vimdoc",
-    "css",
-    "html",
-    "javascript",
-    "latex",
-    "norg",
-    "scss",
-    "svelte",
-    "tsx",
-    "typst",
-    "diff",
-    "vue"
-  },
-  highlight = { enable = true },
-  indent = { enable = true }
-})
-vim.wo.foldmethod = 'expr'
-vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldlevel = 20
-
 require "config/lsp_lua"
-vim.lsp.enable({'ts_ls', 'pyright', 'codebook'})
+-- -- vim.lsp.enable({'ts_ls', 'pyright', 'codebook', 'ccls', 'quick_lint_js'})
+vim.lsp.enable({'ts_ls', 'pyright', 'quick_lint_js', 'markdown_oxide'})
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'markdown', 'javascript', 'c', 'python' },
+  callback = function()
+    -- syntax highlighting, provided by Neovim
+    vim.treesitter.start()
+    -- folds, provided by Neovim
+    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    -- indentation, provided by nvim-treesitter
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+  end,
+})
