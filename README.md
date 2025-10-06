@@ -71,7 +71,7 @@ npm install -g unified-language-server
 
 GitHub Copilot is installed as a project dependency:
 ```bash
-npm install
+npm install -g @github/copilot
 ```
 
 Ensure you have an active GitHub Copilot subscription and are authenticated.
