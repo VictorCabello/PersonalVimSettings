@@ -1,54 +1,55 @@
 vim.pack.add({
-  {src='https://github.com/echasnovski/mini.pick'},
+  {src='https://github.com/folke/snacks.nvim'},
 })
 
--- Function to check if .git directory exists in the root directory
-local function check_git_directory()
-  local handle = io.popen("ls -a")
-  local result = handle:read("*a")
-  handle:close()
-  -- Look for the .git directory in the output
-  if string.match(result, "%.git$") then
-    return true
-  else
-    return false
-  end
-end
+local snacks = require('snacks')
 
--- Execute the function
-check_git_directory()
-local picker = require 'mini.pick'
-picker.setup()
-
-local function find_files()
-  local tool = 'fd'
-  if check_git_directory() then
-    tool = 'git'
-  end
-  picker.builtin.files({tool=tool})
-end
-
-local function live_grep()
-  picker.builtin.grep_live({tool="rg"})
-end
+snacks.setup({
+  explorer = { enabled = true },
+  image = { enabled = true },
+  indent = { enabled = true },
+  scroll = { enabled = true },
+  picker = { enabled = true },
+  statuscolumn = { enabled = true },
+  input = { enabled = true },
+  scope = { enabled = true },
+  notifier = { enabled = true },
+  words = { enabled = true },
+})
 
 
 vim.keymap.set(
   'n',
-  '<leader><leader>',
-  picker.builtin.buffers,
-  { desc = 'Show open buffers' })
-
-vim.keymap.set(
-  'n',
-  '<leader>f',
-  find_files,
-  { desc = 'Find files' }
+  '<space><space>',
+  function()
+    Snacks.picker.smart({multi = { "buffers", "files"}})
+  end,
+  { desc = 'Show buffers' }
 )
 
 vim.keymap.set(
   'n',
-  '<leader>g',
-  live_grep,
-  { desc = 'Live grep in project' }
+  '<space>t',
+  function()
+    Snacks.explorer()
+  end,
+  { desc = 'Show buffers' }
+) 
+
+vim.keymap.set(
+  { 'n', 't' },
+  ']]',
+  function()
+    Snacks.words.jump(vim.v.count1)
+  end,
+  { desc = 'Next reference' }
+)
+
+vim.keymap.set(
+  { 'n', 't' },
+  '[[',
+  function()
+    Snacks.words.jump(-vim.v.count1)
+  end,
+  { desc = 'Prev reference' }
 )

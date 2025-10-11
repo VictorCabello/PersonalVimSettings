@@ -1,0 +1,9 @@
+{
+  "plugins": {
+    "nvim-lspconfig": [],
+    "nvim-treesitter": {
+      "version": "'main'"
+    },
+    "render-markdown.nvim": []
+  }
+}

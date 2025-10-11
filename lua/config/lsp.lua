@@ -32,17 +32,24 @@ vim.keymap.set(
 )
 
 require "config/lsp_lua"
--- -- vim.lsp.enable({'ts_ls', 'pyright', 'codebook', 'ccls', 'quick_lint_js'})
-vim.lsp.enable({'ts_ls', 'pyright', 'quick_lint_js', 'markdown_oxide'})
+-- vim.lsp.enable({'ts_ls', 'pyright', 'codebook', 'ccls', 'quick_lint_js'})
+vim.lsp.enable({
+  'ts_ls',
+  'pyright',
+  'quick_lint_js',
+  'markdown_oxide',
+  'copilot',
+ })
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'markdown', 'javascript', 'c', 'python' },
-  callback = function()
-    -- syntax highlighting, provided by Neovim
-    vim.treesitter.start()
-    -- folds, provided by Neovim
-    vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    -- indentation, provided by nvim-treesitter
-    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-  end,
-})
+ vim.treesitter.language.register("bash", { "sh" })
+ vim.api.nvim_create_autocmd('FileType', {
+   pattern = {'markdown', 'typescript', 'bash', 'c', 'javascript'},
+   callback = function()
+     -- syntax highlighting, provided by Neovim
+     vim.treesitter.start()
+     -- folds, provided by Neovim
+     vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+     -- indentation, provided by nvim-treesitter
+     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+   end,
+ })
