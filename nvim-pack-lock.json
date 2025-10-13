@@ -1,9 +1,16 @@
 {
   "plugins": {
+    "CopilotChat.nvim": [],
+    "copilot.lua": [],
     "nvim-lspconfig": [],
     "nvim-treesitter": {
       "version": "'main'"
     },
-    "render-markdown.nvim": []
+    "plenary.nvim": [],
+    "render-markdown.nvim": [],
+    "snacks.nvim": {
+      "rev": "b8d838d",
+      "src": "https://github.com/folke/snacks.nvim"
+    }
   }
 }
