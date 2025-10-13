@@ -20,9 +20,18 @@ snacks.setup({
 
 vim.keymap.set(
   'n',
+  '<space>ff',
+  function()
+    Snacks.picker.files()
+  end,
+  { desc = 'Show buffers' }
+)
+
+vim.keymap.set(
+  'n',
   '<space><space>',
   function()
-    Snacks.picker.smart({multi = { "buffers", "files"}})
+    Snacks.picker.buffers()
   end,
   { desc = 'Show buffers' }
 )
