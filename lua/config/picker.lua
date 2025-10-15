@@ -62,3 +62,12 @@ vim.keymap.set(
   end,
   { desc = 'Prev reference' }
 )
+
+vim.keymap.set(
+  { 'n' },
+  '<leader>p',
+  function()
+    Snacks.picker()
+  end,
+  { desc = 'Show picker' }
+)
