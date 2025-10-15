@@ -34,6 +34,10 @@ vim.lsp.config('lua_ls', {
           'lua/?/init.lua',
         },
       },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = { 'vim', 'love' },
+      },
       -- Make the server aware of Neovim runtime files
       workspace = {
         checkThirdParty = false,
