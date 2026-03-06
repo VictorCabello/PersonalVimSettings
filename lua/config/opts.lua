@@ -1,9 +1,9 @@
 -- Colorscheme
 -- vim.cmd[[ color sorbet ]]
-vim.cmd[[ color unokai ]]
-vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
-vim.api.nvim_set_hl(0, "NormalNC", { bg = "None" })
-vim.api.nvim_set_hl(0, "EndBuffer", { bg = "None" })
+-- vim.cmd[[ color unokai ]]
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
+-- vim.api.nvim_set_hl(0, "NormalNC", { bg = "None" })
+-- vim.api.nvim_set_hl(0, "EndBuffer", { bg = "None" })
 
 -- Encoding
 vim.scriptencoding = 'utf-8'
