@@ -1,11 +1,23 @@
 vim.pack.add({
-  {src="https://github.com/Mofiqul/dracula.nvim"},
-  {src="https://github.com/nvim-tree/nvim-web-devicons"},
-  {src="https://github.com/nvim-lualine/lualine.nvim"},
+  {src='https://github.com/folke/tokyonight.nvim'},
+  {src='https://github.com/nvim-lualine/lualine.nvim'},
+  {src='https://github.com/nvim-tree/nvim-web-devicons'},
 })
-local dracula = require("dracula")
-dracula.setup({
-  transparent_bg = true
+
+require('tokyonight').setup({
+  style = 'storm',
+  transparent = true,
+  terminal_colors = true,
+  styles = {
+    sidebars = 'transparent',
+    floats = 'transparent',
+  },
 })
-vim.cmd("colorscheme dracula")
-require('lualine').setup()
+
+vim.cmd.colorscheme('tokyonight-storm')
+
+require('lualine').setup {
+  options = {
+    theme = 'tokyonight'
+  }
+}
