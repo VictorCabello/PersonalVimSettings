@@ -44,14 +44,26 @@ vim.lsp.enable({
   'pyright',
   'quick_lint_js',
   'markdown_oxide',
+<<<<<<< Updated upstream
   'qmlls',
   'copilot',
   'lemminx',
+||||||| Stash base
+  'copilot',
+=======
+  'bashls',
+>>>>>>> Stashed changes
  })
 
  vim.treesitter.language.register("bash", { "sh" })
  vim.api.nvim_create_autocmd('FileType', {
+<<<<<<< Updated upstream
    pattern = {'python', 'markdown', 'typescript', 'bash', 'sh', 'c', 'javascript'},
+||||||| Stash base
+   pattern = {'markdown', 'typescript', 'bash', 'c', 'javascript'},
+=======
+   pattern = {'python', 'markdown', 'typescript', 'bash', 'c', 'javascript'},
+>>>>>>> Stashed changes
    callback = function()
      -- syntax highlighting, provided by Neovim
      vim.treesitter.start()
@@ -64,6 +76,7 @@ vim.lsp.enable({
  })
 
 
+<<<<<<< Updated upstream
 
 require("markview").setup({
     tables = {
@@ -72,3 +85,18 @@ require("markview").setup({
     }
 })
 
+||||||| Stash base
+=======
+require("markview").setup({
+    tables = {
+        enable = true,
+        use_virt_lines = true -- Makes tables look like actual UI elements
+    }
+})
+
+
+-- Permite scroll horizontal para tablas anchas
+vim.opt.sidescrolloff = 8 
+-- Oculta los símbolos de markdown para limpiar la vista
+vim.opt.conceallevel = 2 
+>>>>>>> Stashed changes
