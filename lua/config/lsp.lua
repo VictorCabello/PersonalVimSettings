@@ -70,6 +70,9 @@ require("markview").setup({
     tables = {
         enable = true,
         use_virt_lines = true -- Makes tables look like actual UI elements
+    },
+    code_blocks = {
+        enable = false -- Let treesitter handle code block syntax highlighting
     }
 })
 
