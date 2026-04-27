@@ -1,10 +1,3 @@
--- Colorscheme
--- vim.cmd[[ color sorbet ]]
--- vim.cmd[[ color unokai ]]
--- vim.api.nvim_set_hl(0, "Normal", { bg = "None" })
--- vim.api.nvim_set_hl(0, "NormalNC", { bg = "None" })
--- vim.api.nvim_set_hl(0, "EndBuffer", { bg = "None" })
-
 -- Encoding
 vim.scriptencoding = 'utf-8'
 vim.o.encoding = 'utf-8'
@@ -30,6 +23,11 @@ vim.o.cmdheight = 1
 vim.opt.backupskip = { '/tmp/*', '/private/tmp/*' }
 vim.o.inccommand = 'split'
 vim.o.winborder='rounded'
+vim.o.scrolloff = 8
+vim.o.splitright = true
+vim.o.splitbelow = true
+vim.o.undofile = true
+vim.o.undodir = vim.fn.expand('~/.local/share/nvim/undo')
 
 -- indentation
 vim.o.autoindent = true

@@ -42,12 +42,15 @@ All config lives in `lua/config/`:
 | `gd` | Go to definition (LSP) |
 | `<C-Space>` | Trigger LSP completion (insert mode) |
 | `<leader>e` | Show diagnostics |
+| `<leader>r` | LSP rename (buffer-local, on attach) |
+| `<leader>ca` | LSP code action (buffer-local, on attach) |
+| `<leader>ih` | Toggle inlay hints (buffer-local, on attach) |
 | `<leader>a*` | Claude Code panel (toggle/focus/model/buffer/diff) |
 | `<leader>g*` | Git operations (diff/stage/reset/blame) |
 
 ## LSP Servers Configured
 
-`ts_ls`, `pyright`, `quick_lint_js`, `markdown_oxide`, `qmlls`, `copilot`, `lemminx`, `bashls`, `lua_ls`
+`ts_ls`, `pyright`, `quick_lint_js`, `markdown_oxide`, `qmlls`, `copilot`, `lemminx`, `bashls`, `lua_ls`, `ruff`
 
 Treesitter parsers enabled: Python, Markdown, TypeScript, Bash, C, JavaScript.
 
