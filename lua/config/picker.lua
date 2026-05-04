@@ -74,3 +74,12 @@ vim.keymap.set(
   end,
   { desc = 'Show picker' }
 )
+
+vim.keymap.set(
+  { 'n' },
+  '<leader>pr',
+  function()
+    snacks.picker.resume({ exclude = { 'select', 'pickers' } })
+  end,
+  { desc = 'Resume last picker' }
+)
