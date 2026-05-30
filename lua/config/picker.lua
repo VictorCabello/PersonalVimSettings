@@ -1,5 +1,5 @@
 vim.pack.add({
-  {src='https://github.com/folke/snacks.nvim'},
+  { src = 'https://github.com/folke/snacks.nvim' },
 })
 
 local snacks = require('snacks')
@@ -20,6 +20,15 @@ snacks.setup({
   words = { enabled = true },
 })
 
+
+vim.keymap.set(
+  'n',
+  '<space>fg',
+  function()
+    snacks.picker.git_diff()
+  end,
+  { desc = 'Show git files' }
+)
 
 vim.keymap.set(
   'n',
