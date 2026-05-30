@@ -25,7 +25,7 @@ vim.keymap.set(
   'n',
   '<space>fg',
   function()
-    snacks.picker.git_diff()
+    snacks.picker.git_status()
   end,
   { desc = 'Show git files' }
 )
