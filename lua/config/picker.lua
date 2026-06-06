@@ -4,20 +4,21 @@ vim.pack.add({
 
 local snacks = require('snacks')
 
+
 snacks.setup({
-  explorer = { enabled = true },
+  explorer = { enabled = false },
   image = { enabled = true },
-  indent = { enabled = true },
-  scroll = { enabled = true },
+  indent = { enabled = false },
+  scroll = { enabled = false },
   picker = {
     enabled = true,
     ui_select = true
   },
-  statuscolumn = { enabled = true },
-  input = { enabled = true },
-  scope = { enabled = true },
+  statuscolumn = { enabled = false },
+  input = { enabled = false },
+  scope = { enabled = false },
   notifier = { enabled = true },
-  words = { enabled = true },
+  words = { enabled = false },
 })
 
 
