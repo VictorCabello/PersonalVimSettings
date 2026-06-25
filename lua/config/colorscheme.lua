@@ -19,7 +19,7 @@ require("tokyonight").setup({
   transparent = true
 })
 
-vim.cmd.colorscheme('cyberdream')
+vim.cmd.colorscheme('tokyonight-night')
 
 require('lualine').setup {
   options = {
