@@ -1,4 +1,5 @@
 vim.pack.add({
+  { src = 'https://github.com/echasnovski/mini.icons' },
   { src = 'https://github.com/folke/snacks.nvim' },
 })
 
@@ -6,19 +7,19 @@ local snacks = require('snacks')
 
 
 snacks.setup({
-  explorer = { enabled = false },
+  explorer = { enabled = true },
   image = { enabled = true },
-  indent = { enabled = false },
-  scroll = { enabled = false },
+  indent = { enabled = true },
+  scroll = { enabled = true },
   picker = {
     enabled = true,
     ui_select = true
   },
-  statuscolumn = { enabled = false },
-  input = { enabled = false },
-  scope = { enabled = false },
+  statuscolumn = { enabled = true },
+  input = { enabled = true },
+  scope = { enabled = true },
   notifier = { enabled = true },
-  words = { enabled = false },
+  words = { enabled = true },
 })
 
 

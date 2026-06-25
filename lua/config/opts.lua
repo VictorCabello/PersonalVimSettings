@@ -1,3 +1,4 @@
+-- vim.cmd([[colorscheme unokai]])
 -- Encoding
 vim.scriptencoding = 'utf-8'
 vim.o.encoding = 'utf-8'
@@ -12,6 +13,7 @@ vim.o.relativenumber = false
 vim.o.number = true
 vim.o.wrap = true
 
+vim.opt.guicursor = ""
 vim.o.termguicolors = true
 vim.o.colorcolumn = "80"
 vim.o.signcolumn = "yes"
@@ -93,3 +95,5 @@ vim.diagnostic.config({
     source = 'always',
   },
 })
+
+
