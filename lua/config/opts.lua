@@ -1,10 +1,9 @@
--- vim.cmd([[colorscheme unokai]])
 -- Encoding
 vim.scriptencoding = 'utf-8'
 vim.o.encoding = 'utf-8'
 vim.o.fileencoding = 'utf-8'
 
--- clipboard
+-- Clipboard
 vim.o.clipboard = "unnamedplus"
 
 vim.o.conceallevel = 0
@@ -30,49 +29,31 @@ vim.o.splitbelow = true
 vim.o.undofile = true
 vim.o.undodir = vim.fn.expand('~/.local/share/nvim/undo')
 
--- Permite scroll horizontal para tablas anchas
+-- Scroll
 vim.opt.sidescrolloff = 0
 vim.opt.scrolloff = 0
 
--- indentation
+-- Indentation
 vim.o.autoindent = true
 vim.o.smartindent = true
-vim.o.ignorecase = true -- Case insensitive searching UNLESS /C or capital in search
+vim.o.ignorecase = true
 vim.o.smarttab = true
 vim.o.breakindent = true
-vim.o.tabstop = 4      -- A TAB character looks like 4 spaces
-vim.o.expandtab = true -- Pressing the TAB key will insert spaces instead of a TAB character
-vim.o.softtabstop = 4  -- Number of spaces inserted instead of a TAB character
-vim.o.shiftwidth = 4   -- Number of spaces inserted when indenting
-
+vim.o.tabstop = 4
+vim.o.expandtab = true
+vim.o.softtabstop = 4
+vim.o.shiftwidth = 4
 
 vim.g.mapleader = " "
 
 -- Quick save files
-vim.keymap.set('n', '<leader>w', ':w<cr>', { desc = 'save file' })
+vim.keymap.set('n', '<leader>w', ':w<cr>', { desc = 'Save file' })
 
--- Emmacs moves on command mode
--- vim.keymap.set('c', '<M-b>',  '<S-Left>', {
---   desc = 'Move to the previous word',
--- })
--- vim.keymap.set('c', '<M-f>',  '<S-Right>', {
---   desc = 'Move to the next word',
--- })
--- vim.keymap.set('c', '<C-A>',  '<HOME>', {
---   desc = 'Move to the previous word',
--- })
+-- Fast esc en modo inserción
+vim.keymap.set('i', 'hh', '<Esc>', { desc = 'Exit insert mode' })
 
--- Fast esc
-vim.keymap.set('i', 'hh', '<Esc>', { desc = 'Exit terminal mode' })
-
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
+-- Escape en terminal sin romper fzf
 vim.keymap.set('t', 'hh', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
-
 
 vim.diagnostic.config({
   virtual_text = { prefix = '●', spacing = 4 },
@@ -86,4 +67,9 @@ vim.diagnostic.config({
   },
 })
 
-
+vim.api.nvim_create_autocmd({ 'TextYankPost', 'TextPutPost' }, {
+  desc = 'Resaltar texto al copiar o pegar',
+  callback = function()
+    vim.hl.hl_op({ timeout = 150 })
+  end,
+})

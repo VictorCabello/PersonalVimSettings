@@ -1,6 +1,7 @@
 vim.pack.add({
   { src = 'https://github.com/lewis6991/gitsigns.nvim' },
 })
+
 require('gitsigns').setup({
   signs = {
     add          = { text = '┃' },
@@ -12,28 +13,39 @@ require('gitsigns').setup({
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
-    -- Navegar entre hunks        
-    vim.keymap.set('n', ']c', gs.next_hunk, {
-      buffer = bufnr, desc = 'Next hunk' })
-    vim.keymap.set('n', '[c', gs.prev_hunk, {
-      buffer = bufnr, desc = 'Prev hunk' })
+    -- Navegar entre hunks
+    vim.keymap.set('n', ']c', function()
+      if vim.wo.diff then
+        vim.cmd.normal({ ']c', bang = true })
+      else
+        gs.nav_hunk('next')
+      end
+    end, { buffer = bufnr, desc = 'Next hunk' })
 
-    -- Ver el diff del hunk bajo  el cursor                       
-    vim.keymap.set('n',
-    '<leader>gd', gs.preview_hunk, {
-      buffer = bufnr, desc = 'Preview hunk diff' })
+    vim.keymap.set('n', '[c', function()
+      if vim.wo.diff then
+        vim.cmd.normal({ '[c', bang = true })
+      else
+        gs.nav_hunk('prev')
+      end
+    end, { buffer = bufnr, desc = 'Prev hunk' })
 
-    -- Stage / reset hunk       
-    vim.keymap.set('n',
-    '<leader>gs', gs.stage_hunk,  {
-      buffer = bufnr, desc = 'Stage hunk' })
-      vim.keymap.set('n',
-      '<leader>gr', gs.reset_hunk,  {
-        buffer = bufnr, desc = 'Reset hunk' })
+    -- Ver el diff del hunk bajo el cursor
+    vim.keymap.set('n', '<leader>gd', gs.preview_hunk, {
+      buffer = bufnr, desc = 'Preview hunk diff'
+    })
 
-    -- Blame de la línea actual 
-    vim.keymap.set('n',
-    '<leader>gb', gs.blame_line,  {
-      buffer = bufnr, desc = 'Blame line' })
+    -- Stage / reset hunk
+    vim.keymap.set('n', '<leader>gs', gs.stage_hunk, {
+      buffer = bufnr, desc = 'Stage hunk'
+    })
+    vim.keymap.set('n', '<leader>gr', gs.reset_hunk, {
+      buffer = bufnr, desc = 'Reset hunk'
+    })
+
+    -- Blame de la línea actual
+    vim.keymap.set('n', '<leader>gb', gs.blame_line, {
+      buffer = bufnr, desc = 'Blame line'
+    })
   end,
 })
