@@ -16,6 +16,15 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
+vim.lsp.config('clangd', {
+  cmd = {
+    'clangd',
+    '--background-index',
+    '--clang-tidy=false',
+    '--header-insertion=never',
+    '--query-driver=**/agbcc',
+  },
+})
 -- Atajo de teclado estándar para ejecutar las acciones del lente
 vim.lsp.codelens.enable(true)
 vim.lsp.enable({
@@ -25,4 +34,5 @@ vim.lsp.enable({
   'quick_lint_js',
   'markdown_oxide',
   'bashls',
+  'clangd',
 })
